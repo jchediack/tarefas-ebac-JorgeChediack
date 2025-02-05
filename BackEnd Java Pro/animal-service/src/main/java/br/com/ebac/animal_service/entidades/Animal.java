@@ -12,6 +12,9 @@ public class Animal {
     @Column(name = "id", nullable = false)
     private Integer id;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AnimalTipo tipoAnimal;
+    @Column(nullable = false)
     private String nomeProvisorio;
     @Column(nullable = false)
     private Integer idadeEstimada;
@@ -35,6 +38,14 @@ public class Animal {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public AnimalTipo getTipoAnimal() {
+        return tipoAnimal;
+    }
+
+    public void setTipoAnimal(AnimalTipo tipoAnimal) {
+        this.tipoAnimal = tipoAnimal;
     }
 
     public String getNomeProvisorio() {
@@ -108,4 +119,6 @@ public class Animal {
     public void setPorte(String porte) {
         this.porte = porte;
     }
+
+
 }

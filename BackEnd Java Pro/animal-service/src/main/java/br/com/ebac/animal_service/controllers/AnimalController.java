@@ -1,17 +1,18 @@
 package br.com.ebac.animal_service.controllers;
 
+import br.com.ebac.animal_service.dto.FuncionarioResgateDTO;
 import br.com.ebac.animal_service.entidades.Animal;
+import br.com.ebac.animal_service.entidades.AnimalTipo;
 import br.com.ebac.animal_service.repositorios.AnimalRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/animais")
 public class AnimalController {
 
-    private AnimalRepository repository;
+    private final AnimalRepository repository;
 
     public AnimalController(AnimalRepository repository) {
         this.repository = repository;
@@ -35,6 +36,16 @@ public class AnimalController {
     @GetMapping("/adopted")
     private List<Animal> findAdopted() {
         return repository.findAdopted();
+    }
+
+    @GetMapping("/tipo/{tipoAnimal}")
+    public List<Animal> findByTipo(@PathVariable AnimalTipo tipoAnimal) {
+        return repository.findByTipoAnimal(tipoAnimal);
+    }
+
+    @GetMapping("/recebedor")
+    public List<FuncionarioResgateDTO> recebedores() {
+        return repository.countAnimalsByRecebedor();
     }
 
 }
